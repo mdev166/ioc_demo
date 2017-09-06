@@ -17,6 +17,8 @@ namespace IoC.Web.Services
             _logger = logger;
         }
 
+        #region ISalesService methods
+
         /// <summary>
         /// Get sales for employee
         /// </summary>
@@ -78,5 +80,7 @@ namespace IoC.Web.Services
             }
             return sales;
         }
+
+        #endregion
     }
 }

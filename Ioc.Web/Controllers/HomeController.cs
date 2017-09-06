@@ -25,9 +25,9 @@ namespace IoC.Web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "IoC demo app.";
             _logger.Log("Home About view");
 
+            ViewBag.Message = "IoC demo app.";
             return View();
         }
     }

@@ -11,7 +11,7 @@ namespace IoC.Web.Test
     public class SalesControllerTests
     {
         [Fact]
-        public void IndexSucceedsTest()
+        public void IndexRequestSucceedsTest()
         {
             var logger = new Mock<ILoggerService>();
             var service = new Mock<ISalesService>();

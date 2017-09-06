@@ -2,6 +2,8 @@
 {
     public class LoggerService : ILoggerService
     {
+        #region ILoggerService methods
+
         /// <summary>
         /// Log message
         /// </summary>
@@ -20,5 +22,7 @@
         {
             // demo- no logging implementation
         }
+
+        #endregion
     }
 }

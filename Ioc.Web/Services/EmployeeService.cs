@@ -20,6 +20,8 @@ namespace IoC.Web.Services
             InitDemoData();
         }
 
+        #region IEmployeeService methods
+
         /// <summary>
         /// Get sales employees
         /// </summary>
@@ -43,6 +45,10 @@ namespace IoC.Web.Services
             return _employees.FirstOrDefault(e => e.Id == employeeId);
         }
 
+        #endregion
+
+        #region private methods
+
         /// <summary>
         /// Set up demo data
         /// </summary>
@@ -57,5 +63,7 @@ namespace IoC.Web.Services
             _employees.Add(new Employee { Id = 1029, FirstName = "Mordecai", LastName = "Rigby" });
             _employees.Add(new Employee { Id = 1031, FirstName = "Steve", LastName = "Williams" });
         }
+
+        #endregion
     }
 }

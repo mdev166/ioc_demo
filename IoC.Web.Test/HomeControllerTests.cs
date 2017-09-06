@@ -11,7 +11,7 @@ namespace IoC.Web.Test
     public class HomeControllerTests
     {
         [Fact]
-        public void IndexSucceedsTest()
+        public void IndexRequestSucceedsTest()
         {
             var service = new Mock<IEmployeeService>();
             var logger = new Mock<ILoggerService>();
@@ -27,7 +27,7 @@ namespace IoC.Web.Test
             Assert.Equal("Bob", model[0].FirstName);
         }
         [Fact]
-        public void AboutSucceedsTest()
+        public void AboutRequestSucceedsTest()
         {
             var service = new Mock<IEmployeeService>();
             var logger = new Mock<ILoggerService>();

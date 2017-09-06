@@ -11,7 +11,7 @@ namespace IoC.Web.Models
 
         public string FormattedAmount {
             get {
-                return string.Format(CultureInfo.InvariantCulture, "{0:C2}", Amount);
+                return string.Format(CultureInfo.CurrentCulture, "{0:C2}", Amount);
             }
         }
     }
