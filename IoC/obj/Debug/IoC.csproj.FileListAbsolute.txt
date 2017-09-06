@@ -1,0 +1,11 @@
+C:\Projects\Github\IoC_TWT\IoC.Web\IoC\bin\Debug\IoC.dll
+C:\Projects\Github\IoC_TWT\IoC.Web\IoC\bin\Debug\IoC.pdb
+C:\Projects\Github\IoC_TWT\IoC.Web\IoC\obj\Debug\IoC.csproj.CoreCompileInputs.cache
+C:\Projects\Github\IoC_TWT\IoC.Web\IoC\obj\Debug\IoC.dll
+C:\Projects\Github\IoC_TWT\IoC.Web\IoC\obj\Debug\IoC.pdb
+C:\Projects\Github\IoC_TWT\IoC.Web\IoC\obj\Debug\IoC.csprojResolveAssemblyReference.cache
+C:\Projects\Github\IoC_Demo\IoC\bin\Debug\IoC.dll
+C:\Projects\Github\IoC_Demo\IoC\bin\Debug\IoC.pdb
+C:\Projects\Github\IoC_Demo\IoC\obj\Debug\IoC.csproj.CoreCompileInputs.cache
+C:\Projects\Github\IoC_Demo\IoC\obj\Debug\IoC.dll
+C:\Projects\Github\IoC_Demo\IoC\obj\Debug\IoC.pdb
