@@ -1,0 +1,25 @@
+﻿@model IList<IoC.Web.Models.Employee>
+@{
+    ViewBag.Title = "Sales Team";
+}
+<h3>@ViewBag.Title</h3>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">@Html.Label("Employee Id")</div>
+        <div class="col-sm-2">@Html.Label("First Name")</div>
+        <div class="col-sm-2">@Html.Label("Last Name")</div>
+    </div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var salesPerson = Model[i];
+        <div class="row">
+            <div class="col-sm-2">@salesPerson.Id.ToString()</div>
+            <div class="col-sm-2">@salesPerson.FirstName</div>
+            <div class="col-sm-2">@salesPerson.LastName</div>
+            <div class="col-sm-3">
+                <a href="Sales/Index/@salesPerson.Id">view sales</a>
+            </div>
+        </div>
+    }
+</div>
