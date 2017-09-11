@@ -21,7 +21,7 @@ namespace IoC.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             // create IoC container
-            var container = new Container();
+            IContainer container = new Container();
             IoCContainerConfig.Configure(container);
 
             var factory = new CustomControllerFactory(container);

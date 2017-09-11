@@ -7,9 +7,9 @@ namespace IoC
     /// <summary>
     /// Inversion of control container
     /// </summary>
-    public class Container
+    public class Container : IContainer
     {
-        private readonly IList<Registration> registrations = new List<Registration>();
+        private readonly Dictionary<string, Registration> registrations = new Dictionary<string, Registration>();
 
         /// <summary>
         /// Register type
@@ -19,15 +19,15 @@ namespace IoC
         /// <param name="lifeCycleType"></param>
         public void Register<TAbstractType, TConcreteType>(LifeCycleType lifeCycleType = LifeCycleType.Transient)
         {
-            var typeString = typeof(TAbstractType).ToString();
+            var typeName = typeof(TAbstractType).ToString();
             try
             {
                 // remove registration
-                if (registrations.FirstOrDefault(r => r.AbstractType == typeof(TAbstractType)) != null)
+                if (registrations.ContainsKey(typeName))
                     UnRegister<TAbstractType>();
 
-                // register type
-                registrations.Add(new Registration
+                // register
+                registrations.Add(typeName, new Registration
                 {
                     AbstractType = typeof(TAbstractType),
                     ConcreteType = typeof(TConcreteType),
@@ -36,7 +36,29 @@ namespace IoC
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("There was an error registering '{0}'.", typeString), ex);
+                throw new Exception(string.Format("There was an error registering '{0}'.", typeName), ex);
+            }
+        }
+
+        /// <summary>
+        /// Resolve type, create or retrieve concrete instance
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public object Resolve(Type type)
+        {
+            var typeName = type.ToString();
+            try
+            {
+                return GetInstance(GetRegistration(typeName));
+            }
+            catch (TypeNotRegisteredException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Error resolving '{0}'.", typeName), ex);
             }
         }
 
@@ -46,40 +68,14 @@ namespace IoC
         /// <typeparam name="T"></typeparam>
         public void UnRegister<T>()
         {
-            var typeString = typeof(T).ToString();
+            var typeName = typeof(T).ToString();
             try
             {
-                registrations.Remove(registrations.FirstOrDefault(r => r.AbstractType == typeof(T)));
+                registrations.Remove(typeName);
             }
             catch (Exception ex)
             {
-                throw new Exception(string.Format("There was an error un-registering '{0}'.", typeString), ex);
-            }
-        }
-
-        /// <summary>
-        /// Resolve type, create or retreive concrete instance
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public object Resolve(Type type)
-        {
-            var typeString = type.ToString();
-            try
-            {
-                var registration = registrations.FirstOrDefault(t => t.AbstractType == type);
-                if (registration == null)
-                    throw new TypeNotRegisteredException(String.Format("Type '{0}' not registered with Container instance.", typeString));
-
-                return CreateInstance(registration);
-            }
-            catch (TypeNotRegisteredException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(string.Format("Error resolving '{0}'.", typeString), ex);
+                throw new Exception(string.Format("There was an error un-registering '{0}'.", typeName), ex);
             }
         }
 
@@ -90,7 +86,7 @@ namespace IoC
         /// </summary>
         /// <param name="registration"></param>
         /// <returns></returns>
-        private object CreateInstance(Registration registration)
+        private object GetInstance(Registration registration)
         {
             var parameters = new List<object>();
             object instance = null;
@@ -100,11 +96,7 @@ namespace IoC
             {
                 foreach (var param in constructor.GetParameters())
                 {
-                    var parmType = registrations.FirstOrDefault(r => r.AbstractType == param.ParameterType);
-                    if (parmType == null)
-                        throw new TypeNotRegisteredException(String.Format("Type '{0}' not registered with Container instance.", param.ParameterType.ToString()));
-
-                    parameters.Add(CreateInstance(parmType));
+                    parameters.Add(GetInstance(GetRegistration(param.ParameterType.ToString())));
                 }
             }
 
@@ -115,6 +107,7 @@ namespace IoC
             }
             else
             {
+                // create new instance if one does not exist
                 if (registration.Instance == null)
                     registration.Instance = Activator.CreateInstance(registration.ConcreteType, parameters.ToArray());
 
@@ -123,6 +116,21 @@ namespace IoC
             }
 
             return instance;
+        }
+
+        /// <summary>
+        /// Retrieve a registration, throw an exception if not found
+        /// </summary>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
+        private Registration GetRegistration(string typeName)
+        {
+            Registration registration;
+            var found = registrations.TryGetValue(typeName, out registration);
+            if (!found)
+                throw new TypeNotRegisteredException(String.Format("Type '{0}' not registered with Container instance.", typeName));
+
+            return registration;
         }
     }
 

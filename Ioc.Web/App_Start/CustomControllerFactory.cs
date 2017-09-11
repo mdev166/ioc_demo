@@ -6,9 +6,9 @@ namespace IoC.Web
 {
     public class CustomControllerFactory : DefaultControllerFactory
     {
-        private readonly IoC.Container _container;
+        private readonly IContainer _container;
 
-        public CustomControllerFactory(IoC.Container container)
+        public CustomControllerFactory(IContainer container)
         {
             _container = container;
         }

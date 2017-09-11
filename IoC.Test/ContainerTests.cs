@@ -8,7 +8,7 @@ namespace IoC.Test
         [Fact]
         public void Resolve_SucceedsTest()
         {
-            IoC.Container container = new IoC.Container();
+            IContainer container = new IoC.Container();
             container.Register<ITestClass2, TestClass2>(LifeCycleType.Singleton);
             container.Register<ITestClass3, TestClass3>();
             container.Register<ITestClass4, TestClass4>();
@@ -26,7 +26,7 @@ namespace IoC.Test
         [Fact]
         public void Resolve_ThrowsTypeNotRegisteredExceptionTest()
         {
-            IoC.Container container = new IoC.Container();
+            IContainer container = new IoC.Container();
             container.Register<ITestClass2, TestClass2>();
             // leave ITestClass3 out for test
             container.Register<ITestClass4, TestClass4>();
@@ -42,7 +42,7 @@ namespace IoC.Test
         [Fact]
         public void Register_LifeCycleTypeSingletonSucceedsTest()
         {
-            IoC.Container container = new IoC.Container();
+            IContainer container = new IoC.Container();
             container.Register<ITestClass4, TestClass4>();
             container.Register<ITestClass2, TestClass2>(LifeCycleType.Singleton);
             container.Register<ITestClass3, TestClass3>(LifeCycleType.Singleton);
@@ -61,7 +61,7 @@ namespace IoC.Test
         [Fact]
         public void Register_LifeCycleTypeTransientSucceedsTest()
         {
-            IoC.Container container = new IoC.Container();
+            IContainer container = new IoC.Container();
             container.Register<ITestClass4, TestClass4>();
             container.Register<ITestClass2, TestClass2>(LifeCycleType.Transient);
             container.Register<ITestClass3, TestClass3>(LifeCycleType.Transient);
@@ -80,7 +80,7 @@ namespace IoC.Test
         [Fact]
         public void UnRegister_Succeeds()
         {
-            Container container = new IoC.Container();
+            IContainer container = new IoC.Container();
             container.Register<ITestClass4, TestClass4>();
 
             var actual = container.Resolve(typeof(ITestClass4)) as ITestClass4;

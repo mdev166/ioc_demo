@@ -9,7 +9,7 @@ namespace IoC.Web.App_Start
         /// Configure IoC container
         /// </summary>
         /// <param name="container"></param>
-        public static void Configure(IoC.Container container)
+        public static void Configure(IContainer container)
         {
             // register types
             container.Register<HomeController, HomeController>();
