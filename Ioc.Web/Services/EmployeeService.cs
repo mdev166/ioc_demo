@@ -12,20 +12,16 @@ namespace IoC.Web.Services
         public EmployeeService(ILoggerService logger)
         {
             // additionally, could extend this by injecting a data respository
-            //  and and unit test this service
+            //  and unit testing this service
 
             // log- Info, Warning or Error
             _logger = logger;
 
-            InitDemoData();
+            InitDummyData();
         }
 
         #region IEmployeeService methods
 
-        /// <summary>
-        /// Get sales employees
-        /// </summary>
-        /// <returns></returns>
         public IList<Employee> GetEmployees()
         {
             _logger.Log("GetEmployees");
@@ -33,11 +29,6 @@ namespace IoC.Web.Services
             return _employees;
         }
 
-        /// <summary>
-        /// Get sales emplee by id
-        /// </summary>
-        /// <param name="employeeId"></param>
-        /// <returns></returns>
         public Employee GetEmployee(int employeeId)
         {
             _logger.Log("GetEmployee");
@@ -49,11 +40,9 @@ namespace IoC.Web.Services
 
         #region private methods
 
-        /// <summary>
-        /// Set up demo data
-        /// </summary>
-        private void InitDemoData()
+        private void InitDummyData()
         {
+            // demo data
             _employees.Add(new Employee { Id = 1002, FirstName = "Maria", LastName = "Alvarez" });
             _employees.Add(new Employee { Id = 1008, FirstName = "Mitch", LastName = "Benson" });
             _employees.Add(new Employee { Id = 1010, FirstName = "Jerry", LastName = "Johnson" });

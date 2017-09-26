@@ -11,7 +11,7 @@ namespace IoC.Web.Services
         public SalesService(ILoggerService logger)
         {
             // additionally, could extend this by injecting a data respository
-            //  and and unit test this service
+            //  and unit testing this service
 
             // log- Info, Warning or Error
             _logger = logger;
@@ -19,18 +19,20 @@ namespace IoC.Web.Services
 
         #region ISalesService methods
 
-        /// <summary>
-        /// Get sales for employee
-        /// </summary>
-        /// <param name="employeeId"></param>
-        /// <returns></returns>
         public IList<Sale> GetSalesForEmployee(int employeeId)
         {
             _logger.Log("GetSalesForEmployee");
 
-            // return demo-only data
+            return GetDummyData(employeeId);
+        }
+
+        #endregion
+
+        private static IList<Sale> GetDummyData(int employeeId)
+        {
+            // return demo data
             List<Sale> sales = new List<Sale>();
-            switch(employeeId)
+            switch (employeeId)
             {
                 case 1002:
                     sales.Add(new Sale { Id = 454213, Amount = 11010.01m, Date = new DateTime(2017, 06, 21) });
@@ -80,7 +82,5 @@ namespace IoC.Web.Services
             }
             return sales;
         }
-
-        #endregion
     }
 }

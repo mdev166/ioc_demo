@@ -13,14 +13,9 @@ namespace IoC.Web
             _container = container;
         }
 
-        /// <summary>
-        /// Resolve requested type from container
-        /// </summary>
-        /// <param name="requestContext"></param>
-        /// <param name="controllerType"></param>
-        /// <returns></returns>
         protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
         {
+            // Resolve requested type from container
             return _container.Resolve(controllerType) as Controller;
         }
     }

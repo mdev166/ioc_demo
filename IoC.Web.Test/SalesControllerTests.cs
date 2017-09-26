@@ -28,6 +28,7 @@ namespace IoC.Web.Test
             Assert.NotNull(model);
             Assert.NotNull(model.SalesPerson);
             Assert.Equal("Sally", model.SalesPerson.FirstName);
+            Assert.Equal("Test", model.SalesPerson.LastName);
             Assert.Equal(1, model.Sales.Count);
         }
     }

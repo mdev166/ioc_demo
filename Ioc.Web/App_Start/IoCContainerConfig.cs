@@ -5,13 +5,11 @@ namespace IoC.Web.App_Start
 {
     public static class IoCContainerConfig
     {
-        /// <summary>
-        /// Configure IoC container
-        /// </summary>
-        /// <param name="container"></param>
         public static void Configure(IContainer container)
         {
-            // register types
+            // Configure custom IoC container
+
+            //  register types
             container.Register<HomeController, HomeController>();
             container.Register<SalesController, SalesController>();
             container.Register<ILoggerService, LoggerService>(LifeCycleType.Singleton);

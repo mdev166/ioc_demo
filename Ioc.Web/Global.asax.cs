@@ -20,7 +20,7 @@ namespace IoC.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            // create IoC container
+            // create custom IoC container
             IContainer container = new Container();
             IoCContainerConfig.Configure(container);
 
