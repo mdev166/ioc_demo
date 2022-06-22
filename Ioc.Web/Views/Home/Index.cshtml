@@ -9,6 +9,7 @@
         <div class="col-sm-2">@Html.Label("Employee Id")</div>
         <div class="col-sm-2">@Html.Label("First Name")</div>
         <div class="col-sm-2">@Html.Label("Last Name")</div>
+        <div class="col-sm-2">@Html.Label("Sales")</div>
     </div>
     @for (int i = 0; i < Model.Count; i++)
     {
@@ -18,7 +19,7 @@
             <div class="col-sm-2">@salesPerson.FirstName</div>
             <div class="col-sm-2">@salesPerson.LastName</div>
             <div class="col-sm-3">
-                <a href="Sales/Index/@salesPerson.Id">view sales</a>
+                <a href="Sales/Index/@salesPerson.Id">view</a>
             </div>
         </div>
     }
